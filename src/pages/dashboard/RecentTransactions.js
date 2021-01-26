@@ -31,7 +31,7 @@ export default function RecentTransactions(props) {
             <TableCell>Name</TableCell>
             <TableCell>Payment Method</TableCell>
             <TableCell>Status</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell align="right">Transfer Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

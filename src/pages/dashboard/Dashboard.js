@@ -255,7 +255,9 @@ export default function Dashboard() {
     console.log({ amount, name });
     let balance = accounts[0].balance 
     if ((balance -= amount) >= 0) {
-      accounts[0].balance -= amount;
+      let transferingAccount = accounts[0];
+      transferingAccount.balance -= amount
+      setAccounts(accounts.splice(0,3, transferingAccount))
       setTransactions(
         transactions.concat([
           {
