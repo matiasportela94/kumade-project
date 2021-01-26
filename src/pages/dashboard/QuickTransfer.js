@@ -15,7 +15,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function QuickTransfer() {
+export default function QuickTransfer({sendMoney}) {
   const classes = useStyles();
   
   return (
@@ -25,8 +25,8 @@ export default function QuickTransfer() {
       <Form>
         <Form.Row className="align-items-center mt-2 mb-2">
           <Col xs="12">
-            <Form.Control as="select" custom>
-              <option selected>Recent Recipients</option>
+            <Form.Control id="moneyReceiver" as="select" custom required>
+              <option selected disabled>Recent Recipients</option>
               <option>Paul McCartney</option>
               <option>Tom Scholz</option>
               <option>Michael Jackson</option>
@@ -42,8 +42,9 @@ export default function QuickTransfer() {
                 <InputGroup.Text>$</InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl
-                id="inlineFormInputGroup"
+                id="moneyAmount"
                 placeholder="Money ammount"
+                required
               />
             </InputGroup>
           </Col>
@@ -51,10 +52,10 @@ export default function QuickTransfer() {
 
         <Form.Row className="align-items-center mt-2">
           <Col xs="8" className="p-0">
-            <Form.Control placeholder="someone@something.com" />
+            <Form.Control placeholder="someone@something.com" required/>
           </Col>
           <Col xs="auto" className="pl-2">
-            <Button type="submit" >
+            <Button onClick={()=>sendMoney(document.getElementById('moneyAmount').value, document.getElementById('moneyReceiver').value)}>
               <SendIcon />
               <span className="pl-2">Send</span>
             </Button>

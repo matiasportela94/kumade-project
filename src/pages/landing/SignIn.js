@@ -102,7 +102,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5" className={classes.fonts}>
             Sign in
           </Typography>
-          <form className={[classes.form, classes.fonts]} noValidate>
+          <form className={[classes.form, classes.fonts]} validate>
             <TextField
               variant="outlined"
               margin="normal"

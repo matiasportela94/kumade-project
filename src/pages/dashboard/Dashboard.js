@@ -24,28 +24,43 @@ import RecentTransactions from "./RecentTransactions";
 import DebitCard from "./DebitCard";
 import Calendar from "./Calendar";
 import Logo from "../../components/Logo";
-import {Menu, MenuItem} from '@material-ui/core';
-import { NavLink} from "react-router-dom";
-
+import { Menu, MenuItem } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 
 // Generate Account Data
-function createAccountData(id, account, firstName, lastName, balance, cuit, alias) {
+function createAccountData(
+  id,
+  account,
+  firstName,
+  lastName,
+  balance,
+  cuit,
+  alias
+) {
   return { id, account, firstName, lastName, balance, cuit, alias };
 }
 
 // Generate Transaction Data
-function createTransactionsData(id, date, name, variant, status, paymentMethod, amount) {
+function createTransactionsData(
+  id,
+  date,
+  name,
+  variant,
+  status,
+  paymentMethod,
+  amount
+) {
   return { id, date, name, variant, status, paymentMethod, amount };
 }
 
-const transactions = [
+const transactionsData = [
   createTransactionsData(
     0,
     "20 Jan, 2021",
     "John Cusack",
     "primary",
     "Done",
-    "VISA ⠀•••• 3719",
+    "VISA ⠀•••• 0000",
     312.44
   ),
   createTransactionsData(
@@ -54,7 +69,7 @@ const transactions = [
     "Ethan Hawk",
     "primary",
     "Done",
-    "VISA ⠀•••• 2574",
+    "VISA ⠀•••• 0000",
     866.99
   ),
   createTransactionsData(
@@ -68,7 +83,7 @@ const transactions = [
   ),
   createTransactionsData(
     3,
-    "20 Jan, 2021",
+    "21 Jan, 2021",
     "Keanu Reeves",
     "primary",
     "Done",
@@ -77,16 +92,16 @@ const transactions = [
   ),
   createTransactionsData(
     4,
-    "17 Jan, 2021",
+    "22 Jan, 2021",
     "Ethan Hawk",
     "danger",
     "Rejected",
-    "VISA ⠀•••• 5919",
+    "VISA ⠀•••• 0000",
     212.79
   ),
 ];
 
-const accounts = [
+const accountsData = [
   createAccountData(
     0,
     "765915/3",
@@ -113,9 +128,8 @@ const accounts = [
     1849.44,
     20115495648,
     "get.schwifty"
-  )
+  ),
 ];
-
 
 function Copyright() {
   return (
@@ -214,7 +228,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-  
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(true);
@@ -227,6 +240,8 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [transactions, setTransactions] = React.useState(transactionsData);
+  const [accounts, setAccounts] = React.useState(accountsData);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -234,6 +249,28 @@ export default function Dashboard() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const sendMoney = (amount, name) => {
+    console.log({ amount, name });
+    let balance = accounts[0].balance 
+    if ((balance -= amount) >= 0) {
+      accounts[0].balance -= amount;
+      setTransactions(
+        transactions.concat([
+          {
+            date: "24 Jan, 2021",
+            name,
+            variant: "primary",
+            status: "Done",
+            paymentMethod: "VISA ⠀•••• 0000",
+            amount,
+          },
+        ])
+      );
+    }else{
+      alert("Su balance es menor a la cantidad indicada para transferir")
+    }
   };
 
   return (
@@ -323,7 +360,7 @@ export default function Dashboard() {
             {/* Recent Deposits */}
             <Grid item xs={12} md={6} lg={4}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+                <Deposits sendMoney={sendMoney} />
               </Paper>
             </Grid>
 

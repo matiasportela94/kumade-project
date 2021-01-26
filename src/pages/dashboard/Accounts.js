@@ -27,7 +27,7 @@ export default function Deposits(props) {
             <TableRow key={account.id}>
               <TableCell>{account.account}</TableCell>
               <TableCell>{account.firstName + ' ' + account.lastName}</TableCell>
-              <TableCell>{account.balance}</TableCell>
+              <TableCell> { Math.round((account.balance + Number.EPSILON) * 100) / 100}</TableCell>
               <TableCell>{account.cuit}</TableCell>
               <TableCell align="right">{account.alias}</TableCell>
             </TableRow>
