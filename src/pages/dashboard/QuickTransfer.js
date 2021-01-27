@@ -43,6 +43,7 @@ export default function QuickTransfer({sendMoney}) {
               </InputGroup.Prepend>
               <FormControl
                 id="moneyAmount"
+                type="number"
                 placeholder="Money ammount"
                 required
               />

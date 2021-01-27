@@ -53,6 +53,7 @@ function createTransactionsData(
   return { id, date, name, variant, status, paymentMethod, amount };
 }
 
+
 const transactionsData = [
   createTransactionsData(
     0,
@@ -254,9 +255,11 @@ export default function Dashboard() {
   const sendMoney = (amount, name) => {
     console.log({ amount, name });
     let balance = accounts[0].balance 
+    let transferAmount =  parseFloat(amount)
+    console.log(transferAmount)
     if ((balance -= amount) >= 0) {
       let transferingAccount = accounts[0];
-      transferingAccount.balance -= amount
+      transferingAccount.balance -= transferAmount
       setAccounts(accounts.splice(0,3, transferingAccount))
       setTransactions(
         transactions.concat([

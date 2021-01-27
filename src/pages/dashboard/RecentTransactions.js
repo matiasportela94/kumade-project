@@ -45,7 +45,7 @@ export default function RecentTransactions(props) {
                   <Badge variant={transaction.variant}> {transaction.status} </Badge>
                 </div>
               </TableCell>
-              <TableCell align="right">{transaction.amount}</TableCell>
+              <TableCell align="right">{ (Math.round(transaction.amount * 100) / 100).toFixed(2)  }{}</TableCell>
             </TableRow>
           ))}
         </TableBody>
