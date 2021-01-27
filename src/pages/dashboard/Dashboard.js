@@ -253,10 +253,8 @@ export default function Dashboard() {
   };
 
   const sendMoney = (amount, name) => {
-    console.log({ amount, name });
     let balance = accounts[0].balance 
     let transferAmount =  parseFloat(amount)
-    console.log(transferAmount)
     if ((balance -= amount) >= 0) {
       let transferingAccount = accounts[0];
       transferingAccount.balance -= transferAmount
