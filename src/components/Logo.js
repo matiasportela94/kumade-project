@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import '../assets/css/index.css'
 import { Container, Row, Col } from "reactstrap";
 import LogoImage from "../assets/images/DARUMA.png";
